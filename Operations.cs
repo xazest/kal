@@ -13,9 +13,11 @@ namespace ConsoleApp5
         {
             CurrencySymbolFinding(operation);
             Console.Write($"Введите нужное количество {currencySymbol}: ");
-        Again:
-            float.TryParse(Console.ReadLine(), out amountOfMoney);
-            if (amountOfMoney <= 0) { Console.Write("ты че ахуел давай еще раз, сколько "); goto Again; }
+            while (true)
+            {
+                if (float.TryParse(Console.ReadLine(), out amountOfMoney) && amountOfMoney > 0) break;
+                Console.Write("ты че ахуел давай еще раз, сколько ");
+            }
             result = amountOfMoney * Exchange.GetRates(operation);
             ActionFinding(operation);
             Console.WriteLine(action);
